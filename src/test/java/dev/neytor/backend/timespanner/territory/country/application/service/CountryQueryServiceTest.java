@@ -46,7 +46,7 @@ class CountryQueryServiceTest {
         Optional<Country> returnedCountry = service.findByAlpha3Code(givenCode);
 
         verify(queryPort, atLeastOnce()).findCountryByAlpha3Code(any(String.class));
-        assertThat(returnedCountry.isPresent()).isTrue();
+        assertThat(returnedCountry).isPresent();
     }
 
     @DisplayName("Success find by name containing must return a not empty countries list")

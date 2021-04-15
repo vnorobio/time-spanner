@@ -3,6 +3,10 @@ package dev.neytor.backend.timespanner.territory.country.application.port.in.com
 import dev.neytor.backend.timespanner.territory.country.domain.Country;
 
 public class DomainMapper {
+
+    private DomainMapper() {
+    }
+
     public static Country toDomain(CreateCountryCommand command){
         return Country.withoutId(
                 command.getNumericCode(),
