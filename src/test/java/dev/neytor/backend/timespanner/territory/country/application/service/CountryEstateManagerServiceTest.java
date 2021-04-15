@@ -5,11 +5,13 @@ import dev.neytor.backend.timespanner.territory.country.application.port.in.comm
 import dev.neytor.backend.timespanner.territory.country.application.port.in.command.UpdateCountryCommand;
 import dev.neytor.backend.timespanner.territory.country.application.port.out.CountryEstateManagerPort;
 import dev.neytor.backend.timespanner.territory.country.domain.Country;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -23,16 +25,23 @@ import static org.mockito.ArgumentMatchers.any;
 @ExtendWith(MockitoExtension.class)
 class CountryEstateManagerServiceTest {
 
+    @InjectMocks
+    private CountryEstateManagerService service;
+
     @Mock
     private CountryEstateManagerPort estateManagerPort;
 
     @Captor
     ArgumentCaptor<Country> countryArgumentCaptor;
 
+    @BeforeEach
+    public void setup(){
+        this.service = new CountryEstateManagerService(estateManagerPort);
+    }
+
     @DisplayName("Successful country creation should invoke create country method on port")
     @Test
     void createCountrySuccessShouldInvokeCreateCountryOnPort() {
-        CountryEstateManagerService service = new CountryEstateManagerService(estateManagerPort);
         Country givenCountry = getDefaultCountryWithoutId();
         CreateCountryCommand givenCommand = getCreateCommandFromCountry(givenCountry);
 
@@ -47,7 +56,6 @@ class CountryEstateManagerServiceTest {
     @DisplayName("Successful country deletion should invoke delete by id method on port")
     @Test
     void deleteCountryByIdSuccessShouldInvokeDeleteByIdOnPort() {
-        CountryEstateManagerService service = new CountryEstateManagerService(estateManagerPort);
         Long givenId = 1L;
 
         when(estateManagerPort.deleteCountryById(any(Long.class))).thenReturn(Boolean.TRUE);
@@ -61,7 +69,6 @@ class CountryEstateManagerServiceTest {
     @DisplayName("Successful country update should invoke update method on port")
     @Test
     void updateCountrySuccessShouldInvokeUpdateCountryPort() {
-        CountryEstateManagerService service = new CountryEstateManagerService(estateManagerPort);
         Country givenCountry = getDefaultCountryWithId();
         UpdateCountryCommand givenCommand = getUpdateCommandFromCountry(givenCountry);
 
