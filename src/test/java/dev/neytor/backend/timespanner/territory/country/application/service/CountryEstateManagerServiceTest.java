@@ -8,21 +8,26 @@ import dev.neytor.backend.timespanner.territory.country.domain.Country;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.when;
-import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.mock;
+import static org.mockito.ArgumentMatchers.any;
 
 @DisplayName("Testing country estate manager use case")
 @ExtendWith(MockitoExtension.class)
 class CountryEstateManagerServiceTest {
 
-    private final CountryEstateManagerPort estateManagerPort = mock(CountryEstateManagerPort.class);
+    @Mock
+    private CountryEstateManagerPort estateManagerPort;
+
+    @Captor
+    ArgumentCaptor<Country> countryArgumentCaptor;
 
     @DisplayName("Successful country creation should invoke create country method on port")
     @Test
@@ -36,7 +41,7 @@ class CountryEstateManagerServiceTest {
         Country savedCountry = service.createCountry(givenCommand);
 
         verify(estateManagerPort, atLeastOnce()).createCountry(any(Country.class));
-        assertNotNull(savedCountry);
+        assertThat(savedCountry).isNotNull();
     }
 
     @DisplayName("Successful country deletion should invoke delete by id method on port")
@@ -50,7 +55,7 @@ class CountryEstateManagerServiceTest {
         Boolean wasDeleted = service.deleteCountryById(givenId);
 
         verify(estateManagerPort, atLeastOnce()).deleteCountryById(any(Long.class));
-        assertTrue(wasDeleted);
+        assertThat(wasDeleted).isTrue();
     }
 
     @DisplayName("Successful country update should invoke update method on port")
@@ -64,8 +69,9 @@ class CountryEstateManagerServiceTest {
 
         Country updatedCountry = service.updateCountry(givenCommand);
 
-        verify(estateManagerPort, atLeastOnce()).updateCountry(any(Country.class));
-        assertNotNull(updatedCountry);
+        verify(estateManagerPort, atLeastOnce()).updateCountry(countryArgumentCaptor.capture());
+        assertThat(countryArgumentCaptor.getValue()).isNotNull();
+        assertThat(updatedCountry).isNotNull();
     }
 
     private CreateCountryCommand getCreateCommandFromCountry(Country country) {
