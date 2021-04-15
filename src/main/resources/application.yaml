@@ -1,3 +1,35 @@
+server:
+  port: 8084
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: healt,info
+  endpoint:
+    health:
+      show-details: always
+
 spring:
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://dbpostgresql:5432/db_time_spanner?currentSchema=public
+    username: postgres
+    password: S3nc1ll4
+    continueOnError: true
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        hbm2ddl:
+          auto: none
+        temp:
+          use_jdbc_metadata_defaults: false
+        format_sql: true
+    generate-ddl: false
   liquibase:
     enabled: false
+
