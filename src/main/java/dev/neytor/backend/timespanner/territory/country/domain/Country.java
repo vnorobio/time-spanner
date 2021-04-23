@@ -17,31 +17,21 @@ public class Country {
     private final Integer numericCode;
 
     @Getter
-    private final String alphaCode3;
+    private final String alpha3Code;
 
     @Getter
     private final String name;
 
-    @Getter
-    private final String divisionsDisplayName;
-
-    @Getter
-    private final String subDivisionsDisplayName;
-
     public static Country withoutId(
             Integer numericCode,
             String alphaCode3,
-            String name,
-            String divisionsDisplayName,
-            String subDivisionsDisplayName
+            String name
     ) {
         return new Country(
                 null,
                 numericCode,
                 alphaCode3,
-                name,
-                divisionsDisplayName,
-                subDivisionsDisplayName
+                name
         );
     }
 
@@ -49,17 +39,13 @@ public class Country {
             CountryId id,
             Integer numericCode,
             String alphaCode3,
-            String name,
-            String divisionsDisplayName,
-            String subDivisionsDisplayName
+            String name
     ) {
         return new Country(
                 id,
                 numericCode,
                 alphaCode3,
-                name,
-                divisionsDisplayName,
-                subDivisionsDisplayName
+                name
         );
     }
 

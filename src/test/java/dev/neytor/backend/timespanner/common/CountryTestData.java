@@ -19,9 +19,7 @@ public class CountryTestData {
                 .withId(new Country.CountryId(ID_1))
                 .withNumericCode(1234567890)
                 .withAlpha3Code("APM")
-                .withName("Wonderland")
-                .withDivisionsDisplayName("aEstate")
-                .withSubDivisionsDisplayName("aCity");
+                .withName("Wonderland");
     }
 
     public static class CountryBuilder {
@@ -29,8 +27,6 @@ public class CountryTestData {
         private Integer numericCode;
         private String alpha3Code;
         private String name;
-        private String divisionsDisplayName;
-        private String subDivisionsDisplayName;
 
         public CountryBuilder withId(Country.CountryId id) {
             this.id = id;
@@ -52,24 +48,12 @@ public class CountryTestData {
             return this;
         }
 
-        public CountryBuilder withDivisionsDisplayName(String divisionsDisplayName) {
-            this.divisionsDisplayName = divisionsDisplayName;
-            return this;
-        }
-
-        public CountryBuilder withSubDivisionsDisplayName(String subDivisionsDisplayName) {
-            this.subDivisionsDisplayName = subDivisionsDisplayName;
-            return this;
-        }
-
         public Country build() {
             return Country.withId(
                     this.id,
                     this.numericCode,
                     this.alpha3Code,
-                    this.name,
-                    this.divisionsDisplayName,
-                    this.subDivisionsDisplayName
+                    this.name
             );
         }
 

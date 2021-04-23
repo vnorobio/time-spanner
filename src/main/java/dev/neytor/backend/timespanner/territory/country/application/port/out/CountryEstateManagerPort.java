@@ -8,4 +8,7 @@ public interface CountryEstateManagerPort {
     Country updateCountry(Country country);
 
     Boolean deleteCountryById(Long id);
+
+    Boolean existCountryWithId(Long id);
+
 }

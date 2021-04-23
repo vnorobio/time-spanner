@@ -16,21 +16,13 @@ public class CreateCountryCommand extends SelfValidating<CreateCountryCommand> {
     private final String alpha3Code;
     @NotEmpty
     private final String name;
-    @NotEmpty
-    private final String divisionsDisplayName;
-    @NotEmpty
-    private final String subDivisionsDisplayName;
 
     public CreateCountryCommand(Integer numericCode,
                                 String alpha3Code,
-                                String name,
-                                String divisionsDisplayName,
-                                String subDivisionsDisplayName) {
+                                String name) {
         this.numericCode = numericCode;
         this.alpha3Code = alpha3Code;
         this.name = name;
-        this.divisionsDisplayName = divisionsDisplayName;
-        this.subDivisionsDisplayName = subDivisionsDisplayName;
         this.validateSelf();
     }
 }

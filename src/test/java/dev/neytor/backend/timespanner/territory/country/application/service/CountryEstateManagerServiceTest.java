@@ -1,6 +1,7 @@
 package dev.neytor.backend.timespanner.territory.country.application.service;
 
 import dev.neytor.backend.timespanner.common.CountryTestData;
+import dev.neytor.backend.timespanner.territory.country.application.port.in.command.CountryCommandMapper;
 import dev.neytor.backend.timespanner.territory.country.application.port.in.command.CreateCountryCommand;
 import dev.neytor.backend.timespanner.territory.country.application.port.in.command.UpdateCountryCommand;
 import dev.neytor.backend.timespanner.territory.country.application.port.out.CountryEstateManagerPort;
@@ -31,12 +32,15 @@ class CountryEstateManagerServiceTest {
     @Mock
     private CountryEstateManagerPort estateManagerPort;
 
+    @Mock
+    private CountryCommandMapper countryMapper;
+
     @Captor
     ArgumentCaptor<Country> countryArgumentCaptor;
 
     @BeforeEach
     public void setup(){
-        this.service = new CountryEstateManagerService(estateManagerPort);
+        this.service = new CountryEstateManagerService(estateManagerPort, countryMapper);
     }
 
     @DisplayName("Successful country creation should invoke create country method on port")
@@ -45,10 +49,12 @@ class CountryEstateManagerServiceTest {
         Country givenCountry = getDefaultCountryWithoutId();
         CreateCountryCommand givenCommand = getCreateCommandFromCountry(givenCountry);
 
+        when(countryMapper.toDomain(any(CreateCountryCommand.class))).thenReturn(givenCountry);
         when(estateManagerPort.createCountry(any(Country.class))).thenReturn(getDefaultCountryWithId());
 
         Country savedCountry = service.createCountry(givenCommand);
 
+        verify(countryMapper, atLeastOnce()).toDomain(any(CreateCountryCommand.class));
         verify(estateManagerPort, atLeastOnce()).createCountry(any(Country.class));
         assertThat(savedCountry).isNotNull();
     }
@@ -72,10 +78,12 @@ class CountryEstateManagerServiceTest {
         Country givenCountry = getDefaultCountryWithId();
         UpdateCountryCommand givenCommand = getUpdateCommandFromCountry(givenCountry);
 
+        when(countryMapper.toDomain(any(UpdateCountryCommand.class))).thenReturn(givenCountry);
         when(estateManagerPort.updateCountry(any(Country.class))).thenReturn(getDefaultCountryWithId());
 
         Country updatedCountry = service.updateCountry(givenCommand);
 
+        verify(countryMapper, atLeastOnce()).toDomain(any(UpdateCountryCommand.class));
         verify(estateManagerPort, atLeastOnce()).updateCountry(countryArgumentCaptor.capture());
         assertThat(countryArgumentCaptor.getValue()).isNotNull();
         assertThat(updatedCountry).isNotNull();
@@ -84,10 +92,8 @@ class CountryEstateManagerServiceTest {
     private CreateCountryCommand getCreateCommandFromCountry(Country country) {
         return new CreateCountryCommand(
                 country.getNumericCode(),
-                country.getAlphaCode3(),
-                country.getName(),
-                country.getDivisionsDisplayName(),
-                country.getSubDivisionsDisplayName()
+                country.getAlpha3Code(),
+                country.getName()
         );
     }
 
@@ -95,10 +101,8 @@ class CountryEstateManagerServiceTest {
         return new UpdateCountryCommand(
                 country.getId().orElse(new Country.CountryId(1L)).getValue(),
                 country.getNumericCode(),
-                country.getAlphaCode3(),
-                country.getName(),
-                country.getDivisionsDisplayName(),
-                country.getSubDivisionsDisplayName()
+                country.getAlpha3Code(),
+                country.getName()
         );
     }
 
