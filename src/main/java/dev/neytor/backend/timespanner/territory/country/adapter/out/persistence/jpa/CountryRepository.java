@@ -9,11 +9,11 @@ import java.util.Optional;
 
 public interface CountryRepository extends JpaRepository<CountryEntity, Long> {
 
-    Optional<CountryEntity> findByAlpha3Code();
+    Optional<CountryEntity> findByAlpha3Code(String alpha3Code);
 
-    Optional<CountryEntity> findByNumericCode();
+    Optional<CountryEntity> findByNumericCode(Integer numericCode);
 
-    Optional<CountryEntity> findByName();
+    Optional<CountryEntity> findByName(String name);
 
     List<CountryEntity> findByNameContaining(String name);
 }

@@ -20,7 +20,7 @@ public class CountryQueryAdapter implements CountryQueryPort {
     @Override
     public Optional<Country> findCountryByAlpha3Code(String alpha3Code) {
         return Optional.ofNullable(
-                repository.findByAlpha3Code()
+                repository.findByAlpha3Code(alpha3Code)
                         .map(mapper::toDomain)
                         .orElse(null));
     }
@@ -28,7 +28,7 @@ public class CountryQueryAdapter implements CountryQueryPort {
     @Override
     public Optional<Country> findByNumericCode(Integer numericCode) {
         return Optional.ofNullable(
-                repository.findByNumericCode()
+                repository.findByNumericCode(numericCode)
                         .map(mapper::toDomain)
                         .orElse(null));
     }
@@ -36,7 +36,7 @@ public class CountryQueryAdapter implements CountryQueryPort {
     @Override
     public Optional<Country> findByName(String name) {
         return Optional.ofNullable(
-                repository.findByName()
+                repository.findByName(name)
                         .map(mapper::toDomain)
                         .orElse(null));
     }

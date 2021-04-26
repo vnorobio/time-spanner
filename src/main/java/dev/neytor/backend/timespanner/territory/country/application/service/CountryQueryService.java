@@ -22,12 +22,12 @@ public class CountryQueryService implements CountryQuery {
 
     @Override
     public Optional<Country> findByNumericCode(Integer numericCode) {
-        return Optional.empty();
+        return queryPort.findByNumericCode(numericCode);
     }
 
     @Override
     public Optional<Country> findByName(String name) {
-        return Optional.empty();
+        return queryPort.findByName(name);
     }
 
     @Override

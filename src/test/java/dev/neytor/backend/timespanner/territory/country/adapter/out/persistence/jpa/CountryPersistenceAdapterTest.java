@@ -4,7 +4,6 @@ import dev.neytor.backend.timespanner.common.CountryTestData;
 import dev.neytor.backend.timespanner.territory.country.adapter.out.persistence.jpa.entity.CountryEntity;
 import dev.neytor.backend.timespanner.territory.country.adapter.out.persistence.jpa.entity.CountryMapper;
 import dev.neytor.backend.timespanner.territory.country.domain.Country;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,6 +15,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -69,12 +69,13 @@ class CountryPersistenceAdapterTest {
     @DisplayName("Successful country deletion should return confirmation")
     @Test
     void deleteCountryById() {
-        Assertions.fail("TODO: develop test method");
-    }
-
-    @Test
-    void doesCountryIdExists() {
-        Assertions.fail("TODO: develop test method");
+        long givenId = 1L;
+        doNothing().when(repository).deleteById(any(Long.class));
+        when(repository.existsById(any(Long.class))).thenReturn(Boolean.FALSE);
+        Boolean response = adapter.deleteCountryById(givenId);
+        verify(repository,atLeastOnce()).deleteById(any(Long.class));
+        verify(repository,atLeastOnce()).existsById(any(Long.class));
+        assertThat(response).isTrue();
     }
 
     private Country getCountryWithId() {
