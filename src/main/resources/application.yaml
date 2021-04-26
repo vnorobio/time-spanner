@@ -13,7 +13,7 @@ management:
 spring:
   datasource:
     driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://dbpostgresql:5432/db_time_spanner?currentSchema=public
+    url: jdbc:postgresql://localhost:5432/db_time_spanner?currentSchema=public
     username: postgres
     password: S3nc1ll4
     continueOnError: true
@@ -31,5 +31,5 @@ spring:
         format_sql: true
     generate-ddl: false
   liquibase:
-    enabled: false
-
+    enabled: true
+    change-log: classpath:/db/changelog/db.changelog-master.yaml

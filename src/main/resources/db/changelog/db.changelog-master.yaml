@@ -1,0 +1,54 @@
+databaseChangeLog:
+  - changeSet:
+      id: countries-table-create
+      author: vnorobio
+      changes:
+        - createTable:
+            tableName: countries
+            columns:
+              - column:
+                  name: country_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: alpha_3_code
+                  type: varchar(3)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: numeric_code
+                  type: tinyint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: country_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: countries-alpha-3-code-unique-const
+      author: vnorobio
+      changes:
+        - addUniqueConstraint:
+            columnNames: alpha_3_code
+            constraintName: alpha_3_code_uconst
+            tableName: countries
+  - changeSet:
+      id: countries-numeric-code-unique-const
+      author: vnorobio
+      changes:
+        - addUniqueConstraint:
+            columnNames: numeric_code
+            constraintName: numeric_code_uconst
+            tableName: countries
+  - changeSet:
+      id: countries-country-name-unique-const
+      author: vnorobio
+      changes:
+        - addUniqueConstraint:
+            columnNames: country_name
+            constraintName: country_name_uconst
+            tableName: countries
