@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import javax.validation.constraints.NotNull;
 
 @Component
-public class DtoDataMapper {
+public class DtoDataFormatter {
     public CountryDto toDto(@NotNull Country country){
         return new CountryDto(
                 country.getId().orElse(null).getValue(),

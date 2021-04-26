@@ -77,7 +77,29 @@ class CountryQueryServiceTest {
         assertThat(returnedList).hasAtLeastOneElementOfType(Country.class);
     }
 
+    @DisplayName("Success find by alpha 3 code return should have a valid country")
+    @Test
+    void findByNameSuccessOptionalReturnedMustHaveValidCountry() {
+        String givenCountryName = "CountryName";
+        when(queryPort.findByName(any(String.class)))
+                .thenReturn(Optional.of(CountryTestData.defaultCountry().build()));
+        Optional<Country> returnedCountry = service.findByName(givenCountryName);
+        verify(queryPort,atLeastOnce()).findByName(any(String.class));
+        assertThat(returnedCountry).isPresent();
+    }
+
+    @Test
+    void findByNumericCodeSuccessOptionalReturnedMustHaveValidCountry() {
+        Integer givenNumericCode = 123;
+        when(queryPort.findByNumericCode(any(Integer.class)))
+                .thenReturn(Optional.of(CountryTestData.defaultCountry().build()));
+        Optional<Country> returnedCountry = service.findByNumericCode(givenNumericCode);
+        verify(queryPort,atLeastOnce()).findByNumericCode(any(Integer.class));
+        assertThat(returnedCountry).isPresent();
+    }
+
     private List<Country> getCountryList() {
         return CountryTestData.getCountries();
     }
+
 }

@@ -6,9 +6,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class CountryCommandMapper {
 
-    private CountryCommandMapper() {
-    }
-
     public Country toDomain(CreateCountryCommand command){
         return Country.withoutId(
                 command.getData().getNumericCode(),
