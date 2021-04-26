@@ -1,23 +1,27 @@
 package dev.neytor.backend.timespanner.territory.country.application.port.in.command;
 
 import dev.neytor.backend.timespanner.common.SelfValidating;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.Value;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-@Value
+@Data
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @Builder(toBuilder = true)
 public class CountryData extends SelfValidating<CreateCountryCommand> {
     @NotNull
-    Integer numericCode;
+    private Integer numericCode;
     @NotEmpty
-    String alpha3Code;
+    private String alpha3Code;
     @NotEmpty
-    String name;
+    private String name;
 
     public CountryData(Integer numericCode, String alpha3Code, String name) {
         this.numericCode = numericCode;
