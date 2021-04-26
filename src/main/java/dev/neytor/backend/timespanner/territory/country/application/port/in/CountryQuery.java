@@ -8,6 +8,10 @@ import java.util.Optional;
 public interface CountryQuery {
     Optional<Country> findByAlpha3Code(String alpha3Code);
 
+    Optional<Country> findByNumericCode(Integer numericCode);
+
+    Optional<Country> findByName(String name);
+
     List<Country> findByNameContaining(String name);
 
     List<Country> findAll();

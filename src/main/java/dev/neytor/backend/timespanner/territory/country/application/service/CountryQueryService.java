@@ -21,6 +21,16 @@ public class CountryQueryService implements CountryQuery {
     }
 
     @Override
+    public Optional<Country> findByNumericCode(Integer numericCode) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Country> findByName(String name) {
+        return Optional.empty();
+    }
+
+    @Override
     public List<Country> findByNameContaining(String name) {
         return queryPort.findByNameContaining(name);
     }

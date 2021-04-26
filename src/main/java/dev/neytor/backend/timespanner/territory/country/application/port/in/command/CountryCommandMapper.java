@@ -11,18 +11,18 @@ public class CountryCommandMapper {
 
     public Country toDomain(CreateCountryCommand command){
         return Country.withoutId(
-                command.getNumericCode(),
-                command.getAlpha3Code(),
-                command.getName()
+                command.getData().getNumericCode(),
+                command.getData().getAlpha3Code(),
+                command.getData().getName()
         );
     }
 
     public Country toDomain(UpdateCountryCommand command){
         return Country.withId(
                 new Country.CountryId(command.getId()),
-                command.getNumericCode(),
-                command.getAlpha3Code(),
-                command.getName()
+                command.getData().getNumericCode(),
+                command.getData().getAlpha3Code(),
+                command.getData().getName()
         );
     }
 }

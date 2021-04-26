@@ -3,11 +3,13 @@ package dev.neytor.backend.timespanner.territory.country.domain;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.ToString;
 import lombok.Value;
 
 import java.util.Optional;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
+@ToString
 public class Country {
 
     @Getter

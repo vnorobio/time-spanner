@@ -21,21 +21,13 @@ public class CountryPersistenceAdapter implements CountryEstateManagerPort {
 
     @Override
     public Country updateCountry(Country country) {
-        if(!existCountryWithId(country.getId().get().getValue())){
-            throw new RuntimeException();
-        }
         return createCountry(country);
     }
 
     @Override
     public Boolean deleteCountryById(Long id) {
-         repository.deleteById(id);
-         return existCountryWithId(id);
-    }
-
-    @Override
-    public Boolean existCountryWithId(Long id) {
-        return repository.existsById(id);
+        repository.deleteById(id);
+        return !repository.existsById(id);
     }
 
 }

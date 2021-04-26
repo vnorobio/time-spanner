@@ -13,20 +13,12 @@ public class UpdateCountryCommand extends SelfValidating<UpdateCountryCommand> {
     @NotNull
     private final Long id;
     @NotNull
-    private final Integer numericCode;
-    @NotEmpty
-    private final String alpha3Code;
-    @NotEmpty
-    private final String name;
+    private final CountryData data;
 
     public UpdateCountryCommand(Long id,
-                                Integer numericCode,
-                                String alpha3Code,
-                                String name) {
+                                CountryData data) {
         this.id = id;
-        this.numericCode = numericCode;
-        this.alpha3Code = alpha3Code;
-        this.name = name;
+        this.data = data;
         this.validateSelf();
     }
 }

@@ -9,6 +9,4 @@ public interface CountryEstateManagerPort {
 
     Boolean deleteCountryById(Long id);
 
-    Boolean existCountryWithId(Long id);
-
 }
