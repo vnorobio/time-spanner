@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 public class DtoDataMapper {
     public CountryDto toDto(@NotNull Country country){
         return new CountryDto(
-                country.getId().get().getValue(),
+                country.getId().orElse(null).getValue(),
                 country.getAlpha3Code(),
                 country.getName(),
                 country.getNumericCode()

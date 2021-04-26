@@ -51,24 +51,22 @@ class CountryPersistenceAdapterTest {
         assertThat(returnedCountry).isNotNull();
     }
 
-    @DisplayName("Successful country creation should return saved country")
+    @DisplayName("Successful country update should return saved country")
     @Test
-    void updateCountry() {
+    void updateCountrySuccessShouldReturnUpdatedCountry() {
         CountryEntity givenCountryEntity = getCountryEntity(getCountryWithId());
         Country givenCountry = getCountryWithId();
         when(mapper.toJpaEntity(any(Country.class))).thenReturn(givenCountryEntity);
         when(mapper.toDomain(any(CountryEntity.class))).thenReturn(givenCountry);
-        when(repository.existsById(any(Long.class))).thenReturn(Boolean.TRUE);
         when(repository.save(any(CountryEntity.class))).thenReturn(givenCountryEntity);
         Country returnedCountry = adapter.updateCountry(givenCountry);
         verify(repository,atLeastOnce()).save(any(CountryEntity.class));
-        verify(repository,atLeastOnce()).existsById(any(Long.class));
         assertThat(returnedCountry).isNotNull();
     }
 
-    @DisplayName("Successful country deletion should return confirmation")
+    @DisplayName("Successful country delete should return confirmation")
     @Test
-    void deleteCountryById() {
+    void deleteCountryByIdShouldConfirmDeletion() {
         long givenId = 1L;
         doNothing().when(repository).deleteById(any(Long.class));
         when(repository.existsById(any(Long.class))).thenReturn(Boolean.FALSE);
