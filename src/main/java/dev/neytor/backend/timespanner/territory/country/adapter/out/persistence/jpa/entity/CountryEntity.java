@@ -7,26 +7,28 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "country")
+@Table(name = "countries")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class CountryEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "country_id")
     private Long id;
 
-    @Column
+    @Column(name = "alpha_3_code")
     private String alpha3Code;
 
-    @Column
+    @Column(name = "country_name")
     private String name;
 
-    @Column
+    @Column(name = "numeric_code")
     private Integer numericCode;
 }

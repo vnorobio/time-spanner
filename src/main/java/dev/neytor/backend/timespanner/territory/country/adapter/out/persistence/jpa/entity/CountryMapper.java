@@ -17,7 +17,7 @@ public class CountryMapper {
 
     public CountryEntity toJpaEntity(Country country) {
         return new CountryEntity(
-                country.getId().orElse(null).getValue(),
+                country.getId().map(Country.CountryId::getValue).orElse(null),
                 country.getAlpha3Code(),
                 country.getName(),
                 country.getNumericCode()
