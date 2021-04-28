@@ -1,10 +1,10 @@
 package dev.neytor.backend.timespanner.territory.country.application.port.in.command;
 
 import dev.neytor.backend.timespanner.common.SelfValidating;
+import dev.neytor.backend.timespanner.territory.country.application.port.in.command.model.CountryData;
 import lombok.EqualsAndHashCode;
 import lombok.Value;
 
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Value

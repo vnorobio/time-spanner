@@ -1,5 +1,7 @@
-package dev.neytor.backend.timespanner.territory.country.application.port.in.command;
+package dev.neytor.backend.timespanner.territory.country.application.port.in.command.model;
 
+import dev.neytor.backend.timespanner.territory.country.application.port.in.command.CreateCountryCommand;
+import dev.neytor.backend.timespanner.territory.country.application.port.in.command.UpdateCountryCommand;
 import dev.neytor.backend.timespanner.territory.country.domain.Country;
 import org.springframework.stereotype.Component;
 

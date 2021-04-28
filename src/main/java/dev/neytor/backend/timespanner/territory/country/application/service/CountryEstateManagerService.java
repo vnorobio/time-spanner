@@ -4,7 +4,7 @@ import dev.neytor.backend.timespanner.common.UseCase;
 import dev.neytor.backend.timespanner.common.exception.BusinessVerificationException;
 import dev.neytor.backend.timespanner.territory.country.application.port.in.CountryEstateManagerUseCase;
 import dev.neytor.backend.timespanner.territory.country.application.port.in.command.CreateCountryCommand;
-import dev.neytor.backend.timespanner.territory.country.application.port.in.command.CountryCommandMapper;
+import dev.neytor.backend.timespanner.territory.country.application.port.in.command.model.CountryCommandMapper;
 import dev.neytor.backend.timespanner.territory.country.application.port.in.command.UpdateCountryCommand;
 import dev.neytor.backend.timespanner.territory.country.application.port.out.CountryEstateManagerPort;
 import dev.neytor.backend.timespanner.territory.country.application.port.out.CountryQueryPort;
@@ -40,7 +40,6 @@ public class CountryEstateManagerService implements CountryEstateManagerUseCase 
     public Country updateCountry(UpdateCountryCommand updateCommand) {
         validateThatCountryIdAlreadyExists(updateCommand.getId());
         Country country = countryMapper.toDomain(updateCommand);
-        validateCountryDataConstrains(country);
         return estateManagerPort.updateCountry(country);
     }
 

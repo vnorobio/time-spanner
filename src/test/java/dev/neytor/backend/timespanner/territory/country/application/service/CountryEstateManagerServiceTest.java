@@ -2,8 +2,8 @@ package dev.neytor.backend.timespanner.territory.country.application.service;
 
 import dev.neytor.backend.timespanner.common.CountryTestData;
 import dev.neytor.backend.timespanner.common.exception.BusinessVerificationException;
-import dev.neytor.backend.timespanner.territory.country.application.port.in.command.CountryCommandMapper;
-import dev.neytor.backend.timespanner.territory.country.application.port.in.command.CountryData;
+import dev.neytor.backend.timespanner.territory.country.application.port.in.command.model.CountryCommandMapper;
+import dev.neytor.backend.timespanner.territory.country.application.port.in.command.model.CountryData;
 import dev.neytor.backend.timespanner.territory.country.application.port.in.command.CreateCountryCommand;
 import dev.neytor.backend.timespanner.territory.country.application.port.in.command.UpdateCountryCommand;
 import dev.neytor.backend.timespanner.territory.country.application.port.out.CountryEstateManagerPort;
@@ -140,20 +140,6 @@ class CountryEstateManagerServiceTest {
         when(countryMapper.toDomain(any(CreateCountryCommand.class))).thenReturn(argumentCountry);
         when(queryAdapter.findAll()).thenReturn(Arrays.asList(givenCountry));
         assertThatThrownBy(() -> service.createCountry(givenCommand))
-                .isInstanceOf(BusinessVerificationException.class)
-                .hasMessageContaining(expected);
-    }
-
-    @DisplayName("Fail update country with invalid data should throws BusinessVerificationException")
-    @MethodSource("provideRegistersForBusinessVerificationException")
-    @ParameterizedTest
-    void updateCountryFailShouldThrowsBusinessVerificationException(Country argumentCountry, String expected) {
-        Country givenCountry = getDefaultCountryWithId();
-        UpdateCountryCommand givenCommand = getUpdateCommandFromCountry(argumentCountry);
-        when(queryAdapter.doesCountryIdExists(any(Long.class))).thenReturn(Boolean.TRUE);
-        when(countryMapper.toDomain(any(UpdateCountryCommand.class))).thenReturn(argumentCountry);
-        when(queryAdapter.findAll()).thenReturn(Arrays.asList(givenCountry));
-        assertThatThrownBy(() -> service.updateCountry(givenCommand))
                 .isInstanceOf(BusinessVerificationException.class)
                 .hasMessageContaining(expected);
     }

@@ -1,6 +1,7 @@
-package dev.neytor.backend.timespanner.territory.country.application.port.in.command;
+package dev.neytor.backend.timespanner.territory.country.application.port.in.command.model;
 
 import dev.neytor.backend.timespanner.common.SelfValidating;
+import dev.neytor.backend.timespanner.territory.country.application.port.in.command.CreateCountryCommand;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

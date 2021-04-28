@@ -1,5 +1,7 @@
 package dev.neytor.backend.timespanner.territory.country.application.port.in.command;
 
+import dev.neytor.backend.timespanner.territory.country.application.port.in.command.model.CountryCommandMapper;
+import dev.neytor.backend.timespanner.territory.country.application.port.in.command.model.CountryData;
 import dev.neytor.backend.timespanner.territory.country.domain.Country;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -8,7 +10,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("Testing Country Command Mapper")
 @ExtendWith(MockitoExtension.class)
@@ -50,11 +51,10 @@ class CountryCommandMapperTest {
     }
 
     private CountryData getCountryData() {
-        CountryData data = new CountryData(
+        return new CountryData(
                 1234567890,
                 "APM",
                 "Wonderland"
         );
-        return data;
     }
 }
